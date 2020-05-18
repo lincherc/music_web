@@ -27,35 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-/*
-class msg {
-    String ok;
-
-    public String getOk() {
-        return ok;
-    }
-
-    public void setOk(String ok) {
-        this.ok = ok;
-    }
-}
-
-class RandomName {
-
-    public static String getRandomName(String fileName) {
-        int index = fileName.lastIndexOf(".");
-        String houzhui = fileName.substring(index);//获取后缀名
-        return UUID.randomUUID().toString().replace("-", "") + houzhui;
-    }
-
-}
-
- */
-
-
-
-
-
 
 
 @Controller
