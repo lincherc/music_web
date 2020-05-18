@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1 , user-scalable=no" name="viewport">
+    <title>在线音乐网站</title>
+    <link href="../static/base/images/logo.png" rel="shortcut icon">
+    <link href="../static/base/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/base/css/bootstrap-movie.css" rel="stylesheet">
+    <link href="../static/base/css/animate.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/holder/2.9.4/holder.js"></script>
+
+    <style>
+        .navbar-brand > img {
+            display: inline;
+        }
+    </style>
+    <style>
+        .media {
+            padding: 3px;
+            border: 1px solid #ccc
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<div th:replace="/user/head::header"></div>
+
+<!--内容-->
+<!--内容-->
+<!--热门音乐-->
+<section id="hotmovie" style="margin-top:76px">
+    <div class="container">
+        <div class="row wow fadeInRight" data-wow-delay="0.6s">
+            <div class="row">
+                <iframe class="wow fadeIn" frameborder=0 height="375px" scrolling=no
+                        src="../static/animation/animation.html"
+                        width="100%"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
+<!--热门音乐-->
+<!--音乐-->
+<section id="movielist">
+    <div class="container">
+        <div class="row wow fadeIn" data-wow-delay="0.6s">
+            <div class="col-md-12 table-responsive">
+                <table class="table text-left table-bordered" id="movietags">
+                    <tr>
+                        <td style="width:10%;">音乐标签</td>
+                        <td style="width:90%;">
+                            <a th:each="tag:${tags}"><a
+                                    class="label label-info"
+                                    th:href="@{'/user/index?'+'tid='+${tag.id}+'&pm='+${pm}+'&cm='+${cm}}">
+                                <span class="glyphicon glyphicon-tag"></span>[[${tag.tagName}]]</a>
+                                &nbsp;&nbsp;</a>
+                            <!--                            <a class="label label-info"><span class="glyphicon glyphicon-tag"></span>&nbsp;标签一</a>-->
+                            <!--                            &nbsp;-->
+                            <!--                            <a class="label label-info"><span class="glyphicon glyphicon-tag"></span>&nbsp;标签一</a>-->
+                            <!--                            &nbsp;-->
+                            <!--                            <a class="label label-info"><span class="glyphicon glyphicon-tag"></span>&nbsp;标签一</a>-->
+                            <!--                            &nbsp;-->
+                            <!--                            <a class="label label-info"><span class="glyphicon glyphicon-tag"></span>&nbsp;标签一</a>-->
+                        </td>
+                    </tr>
+                    <!--                    <tr>-->
+                    <!--                        <td>音乐星级</td>-->
+                    <!--                        <td>-->
+                    <!--                            <a class="label label-warning"><span class="glyphicon glyphicon-star"></span>&nbsp;一星</a>-->
+                    <!--                            &nbsp;-->
+                    <!--                            <a class="label label-warning"><span class="glyphicon glyphicon-star"></span>&nbsp;二星</a>-->
+                    <!--                            &nbsp;-->
+                    <!--                            <a class="label label-warning"><span class="glyphicon glyphicon-star"></span>&nbsp;三星</a>-->
+                    <!--                            &nbsp;-->
+                    <!--                            <a class="label label-warning"><span class="glyphicon glyphicon-star"></span>&nbsp;四星</a>-->
+                    <!--                            &nbsp;-->
+                    <!--                            <a class="label label-warning"><span class="glyphicon glyphicon-star"></span>&nbsp;五星</a>-->
+                    <!--                        </td>-->
+                    <!--                    </tr>-->
+                    <!--                    <tr>-->
+                    <!--                        <td>上映时间</td>-->
+                    <!--                        <td>-->
+                    <!--                            <a class="label label-default"><span class="glyphicon glyphicon-time"></span>&nbsp;最近</span>-->
+                    <!--                            </a>-->
+                    <!--                            &nbsp;-->
+                    <!--                            <a class="label label-default"><span-->
+                    <!--                                    class="glyphicon glyphicon-time"></span>&nbsp;2017</span></a>-->
+                    <!--                            &nbsp;-->
+                    <!--                            <a class="label label-default"><span-->
+                    <!--                                    class="glyphicon glyphicon-time"></span>&nbsp;2016</span></a>-->
+                    <!--                            &nbsp;-->
+                    <!--                            <a class="label label-default"><span-->
+                    <!--                                    class="glyphicon glyphicon-time"></span>&nbsp;2015</span></a>-->
+                    <!--                            &nbsp;-->
+                    <!--                            <a class="label label-default"><span class="glyphicon glyphicon-time"></span>&nbsp;更早</span>-->
+                    <!--                            </a>-->
+                    <!--                        </td>-->
+                    <!--                    </tr>-->
+                    <tr>
+                        <td>播放数量</td>
+                        <td>
+                            <a class="label label-success"
+                               th:href="@{'/user/index?'+'tid='+${tid}+'&pm=1'+'&cm='+${cm}}"
+                            ><span class="glyphicon glyphicon-arrow-down"></span>&nbsp;从高到低</span>
+                            </a>
+                            &nbsp;
+                            <a class="label label-danger"
+                               th:href="@{'/user/index?'+'tid='+${tid}+'&pm=0'+'&cm='+${cm}}"
+                            ><span
+                                    class="glyphicon glyphicon-arrow-up"></span>&nbsp;从低到高</span></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>评论数量</td>
+                        <td>
+                            <a class="label label-success"
+                               th:href="@{'/user/index?'+'tid='+${tid}+'&pm='+${pm}+'&cm=1'}"
+                            ><span class="glyphicon glyphicon-arrow-down"></span>&nbsp;从高到低</span>
+                            </a>
+                            &nbsp;
+                            <a class="label label-danger"
+                               th:href="@{'/user/index?'+'tid='+${tid}+'&pm='+${pm}+'&cm=0'}"
+                            ><span
+                                    class="glyphicon glyphicon-arrow-up"></span>&nbsp;从低到高</span></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-3" th:each="music:${musics}">
+                <div class="movielist text-center">
+                    <!--<img data-original="holder.js/262x166"
+                             class="img-responsive lazy center-block" alt="">-->
+                    <a th:href="@{'/user/play/'+${music.id}}">
+                        <img alt=""
+                             class="img-responsive center-block" style="height: 166px;width: 266px;"
+                             th:src="@{'/static/users/music/images/'+${music.imgresaddr}} ">
+                    </a>
+                    <div class="text-center" style="margin-left:auto;margin-right:auto;width:210px;">
+                        <span style="color:#999;margin:20px; font-size:20px; font-style: normal;"
+                              th:text="${music.name}"></span><br>
+                    </div>
+                    <a class="btn btn-primary" role="button" target="_blank"
+                       th:href="@{'/user/playmusic/'+${music.id}}"><span
+                            class="glyphicon glyphicon-play"></span>&nbsp;播放</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--音乐列表-->
+<!--&lt;!&ndash;底部&ndash;&gt;-->
+<!--<footer>-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-12">-->
+<!--                <p>-->
+<!--                    ©&nbsp;2017&nbsp;flaskmovie.imooc.com&nbsp;京ICP备 13046642号-2-->
+<!--                </p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</footer>-->
+<!--&lt;!&ndash;底部&ndash;&gt;-->
+<script src="../static/base/js/jquery.min.js"></script>
+<script src="../static/base/js/bootstrap.min.js"></script>
+<script src="../static/base/js/jquery.singlePageNav.min.js"></script>
+<script src="../static/base/js/wow.min.js"></script>
+<script src="../static/lazyload/jquery.lazyload.min.js"></script>
+<script src="//cdn.bootcss.com/holder/2.9.4/holder.min.js"></script>
+<script>
+    $(function () {
+        new WOW().init();
+    })
+
+</script>
+<script>
+    $(document).ready(function () {
+        $("img.lazy").lazyload({
+            effect: "fadeIn"
+        });
+        $("#do_search").click(function () {
+            var key = $("#key_music").val();
+            location.href = "/user/search?key=" + key;
+        });
+    });
+
+</script>
+</body>
+</html>

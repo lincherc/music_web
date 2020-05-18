@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="admin/common/header :: header"></th:block>
+    <title>音乐上传后台管理</title>
+    <link rel="stylesheet" th:href="@{~/static/adminstatic/plug-in/AdminLTE/dist/css/AdminLTE.min.css}"/>
+    <link rel="stylesheet" th:href="@{~/static/adminstatic/plug-in/AdminLTE/dist/css/skins/_all-skins.min.css}"/>
+    <!-- AdminLTE App -->
+    <script th:src="@{~/static/adminstatic/plug-in/AdminLTE/dist/js/adminlte.min.js}"></script>
+    <script th:src="@{~/static/adminstatic/plug-in/AdminLTE/dist/js/demo.js}"></script>
+    <script th:src="@{~/static/adminstatic/script/index.js}"></script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini" style="overflow: hidden">
+<div class="wrapper">
+    <header class="main-header">
+        <a class="logo" href="index" style="border-right:none">
+
+            <div class="photo" style="float:left;width:20%;"><img style="width: 40px;height: 40px"
+                                                                  th:src="@{~/static/base/images/logo.png}"/></div>
+            <div class="intro" style="float:right;width:80%;">
+                管理员界面
+            </div>
+            <!--      <span class="logo-lg">-->
+            <!--          <img th:src="@{~/static/base/images/logo.png}" style="width: 50px;height: 50px"/>-->
+            <!--      </span>-->
+        </a>
+        <nav class="navbar navbar-static-top">
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown user user-menu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <img alt="User Image"
+                                 class="user-image" th:src="@{~/static/adminstatic/images/1.jpg}"/>
+                            <!--/*@thymesVar id="admin" type=""*/-->
+                            <span class="hidden-xs" th:text="${admin.nickname}">Admin</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="sidebar-toggle" data-toggle="push-menu" href="#" role="button">
+                            <span class="sr-only">Toggle navigation</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="index.event.exit()" title="退出登录"><i class="fa fa-sign-out"></i></a>
+                    </li>
+                    <li>
+                        <a data-toggle="control-sidebar" href="#"><i class="fa fa-gears"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img alt="User Image" class="img-circle"
+                         th:src="@{~/static/adminstatic/images/1.jpg}"/>
+                </div>
+                <div class="pull-left info">
+                    <p></p>
+                    <p>[[${admin.nickname}]],欢迎登录</p>
+                </div>
+            </div>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="active treeview" id="menu2">
+                    <a href="#">
+                        <i class="fa fa-music"></i> <span>音乐管理</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right" id="menu2_clc"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu" id="2-1" style="display: block">
+                        <li><a href="#" onclick="index.event.switchMenu(2,'menu2')"><i class="fa fa-circle-o"></i> 音乐审核</a>
+                        </li>
+                    </ul>
+
+                    <ul class="treeview-menu" id="2-2" style="display: block">
+                        <li><a href="#" onclick="index.event.switchMenu(3,'menu2')"><i class="fa fa-circle-o"></i> 音乐删除</a>
+                        </li>
+                    </ul>
+            </ul>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="active treeview" id="menu3">
+                    <a href="#">
+                        <i class="fa fa-comment"></i> <span>评论管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="index.event.switchMenu(4,'menu3')"><i class="fa fa-circle-o"></i> 评论删除</a>
+                        </li>
+                    </ul>
+            </ul>
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="active treeview" id="menu4">
+                    <a href="#">
+                        <i class="fa fa-tag"></i> <span>标签管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#" onclick="index.event.switchMenu(5,'menu4')"><i
+                                class="fa fa-circle-o"></i>音乐标签</a>
+                        </li>
+                    </ul>
+            </ul>
+
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="active treeview" id="menu5">
+                    <a href="#">
+                        <i class="fa fa-user"></i> <span>查看用户</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu" id="5-1">
+                        <li><a href="#" onclick="index.event.switchMenu(6,'menu5')"><i class="fa fa-circle-o"></i>用户登录日志</a>
+                        </li>
+                    </ul>
+
+                    <ul class="treeview-menu" id="5-2">
+                        <li><a href="#" onclick="index.event.switchMenu(7,'menu5')"><i
+                                class="fa fa-circle-o"></i>用户收藏</a>
+                        </li>
+                    </ul>
+            </ul>
+        </section>
+    </aside>
+    <div class="content-wrapper" id="iframe-div" style="overflow: hidden;background-color: #FFFFFF;">
+        <iframe frameborder="0" height="100%" id="bframe" scrolling="auto" width="100%"></iframe>
+    </div>
+    <aside class="control-sidebar control-sidebar-dark">
+        <div class="tab-content">
+            <div class="tab-pane" id="control-sidebar-home-tab">
+            </div>
+        </div>
+    </aside>
+    <div class="control-sidebar-bg"></div>
+</div>
+</body>
+<script>
+    $(document).ready(function () {
+        index.init.pageInit();
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#menu2_clc").click(function () {
+            var e1 = document.getElementById("2-1");
+            var e2 = document.getElementById("2-2");
+            if (e2.style.display === "none") {
+                e2.style.display = "";
+                e1.style.display = "";
+            } else {
+                e2.style.display = "none";
+                e1.style.display = "none";
+            }
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="common/header :: header"></th:block>
+    <title>新闻预览</title>
+    <style>
+        .h {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="border: 1px solid #dddddd;box-shadow:0px 0px 5px #dddddd">
+    <div class="row" style="background: #FFFFFF">
+        <div class="col-sm-12">
+            <h3 class="h3 h" th:text="${news.title}"></h3>
+            <h6 class="h6 h" th:text="'发布时间：'+${news.publishTime}"></h6>
+        </div>
+        <div class="col-sm-12" th:utext="${news.content}">
+
+        </div>
+        <div class="col-sm-12" style="text-align: center">
+            <button class="btn btn-primary" onclick="closeWin()" type="button"><i class="fa fa-close"> 关闭</i></button>
+        </div>
+        <div class="col-sm-12" style="height: 50px"></div>
+    </div>
+</div>
+</body>
+</html>
