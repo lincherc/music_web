@@ -7,7 +7,9 @@ import com.group9.musicweb.service.CommentService;
 import com.group9.musicweb.service.MusicService;
 import com.group9.musicweb.service.UserService;
 import com.group9.musicweb.service.UserlogService;
+import com.group9.musicweb.util.Campare;
 import com.group9.musicweb.util.EdgeIEPath;
+import com.group9.musicweb.util.IpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -23,11 +25,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.*;
 
-
+/*
 class msg {
     String ok;
 
@@ -39,7 +39,7 @@ class msg {
         this.ok = ok;
     }
 }
-/*
+
 class RandomName {
 
     public static String getRandomName(String fileName) {
@@ -53,57 +53,9 @@ class RandomName {
  */
 
 
-class IpUtil {
-    public static String getIpAddr(HttpServletRequest request) {
-        String ipAddress = null;
-        try {
-            ipAddress = request.getHeader("x-forwarded-for");
-            if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-                ipAddress = request.getHeader("Proxy-Client-IP");
-            }
-            if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-                ipAddress = request.getHeader("WL-Proxy-Client-IP");
-            }
-            if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-                ipAddress = request.getRemoteAddr();
-                if (ipAddress.equals("127.0.0.1")) {
-                    // 根据网卡取本机配置的IP
-                    InetAddress inet = null;
-                    try {
-                        inet = InetAddress.getLocalHost();
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    }
-                    ipAddress = inet.getHostAddress();
-                }
-            }
-            // 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
-            if (ipAddress != null && ipAddress.length() > 15) { // "***.***.***.***".length()
-                // = 15
-                if (ipAddress.indexOf(",") > 0) {
-                    ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
-                }
-            }
-        } catch (Exception e) {
-            ipAddress = "";
-        }
-        return ipAddress;
-    }
-}
 
 
-class Campare {
-    public static double campare(int[] L1, int[] L2, int length) {
-        double sum1 = 0, sum2 = 0, sum3 = 0;
-        for (int i = 0; i < length; i++) {
-            sum1 += L1[i] * L2[i];
-            sum2 += L1[i] * L1[i];
-            sum3 += L2[i] * L2[i];
-        }
-        return sum1 / (Math.sqrt(sum2) * Math.sqrt(sum3));
 
-    }
-}
 
 
 @Controller
@@ -436,11 +388,11 @@ public class UserController {
 
     @GetMapping("musiccol/add")
     @ResponseBody
-    public msg addmusiccol(@RequestParam(name = "uid") int uid, @RequestParam(name = "mid") int mid) {
-        msg m = new msg();
+    public String addmusiccol(@RequestParam(name = "uid") int uid, @RequestParam(name = "mid") int mid) {
+        //msg m = new msg();
         Musiccol musiccol = musiccolRepository.findMusiccol(uid, mid);
         if (musiccol != null) {
-            m.setOk("0");
+            return "0";
         } else {
             User user = userService.findUserById(uid);
             Music music = musicService.findMusicById(mid);
@@ -448,9 +400,9 @@ public class UserController {
             musiccol.setUser(user);
             musiccol.setMusic(music);
             musiccolRepository.save(musiccol);
-            m.setOk("1");
+            //m.setOk("1");
+            return "1";
         }
-        return m;
     }
 
     @GetMapping("musiccol")
