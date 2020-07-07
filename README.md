@@ -1,4 +1,3 @@
 # JavaEE
-music website
-
-WARNING: All right reserved. Any unauthorized use will be deemed illegal.
+music website bulid on springboot by java
+mysql+hibernate+thymeleaf
